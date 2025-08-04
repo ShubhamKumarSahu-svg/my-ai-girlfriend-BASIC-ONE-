@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My AI Girlfriend – Quick Guide
 
-## Getting Started
+A modern Next.js app for chatting with an AI girlfriend using voice and text.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Voice input (STT):** Speak to the app, your speech is transcribed to text.
+- **AI chat (Gemini):** Your text is sent to Google Gemini for a smart reply.
+- **Voice output (TTS):** The AI's reply is spoken back to you using ElevenLabs TTS.
+
+---
+
+## How It Works (Flow Diagram)
+
+```mermaid
+flowchart LR
+    A[🎤 User speaks] --> B[STT: Speech-to-Text (browser)]
+    B --> C[Gemini API (AI chat)]
+    C --> D[TTS: Text-to-Speech (ElevenLabs)]
+    D --> E[🔊 AI voice reply]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/api/gemini/route.ts` – Handles chat with Gemini (AI)
+- `src/app/api/tts/route.ts` – Handles text-to-speech (TTS)
+- `src/components/SpeechClient.tsx` – Main UI, manages voice and chat
+- `src/types/global.d.ts` – Types for browser speech APIs
+
+---
+
+## Setup
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Add API keys:**
+   - Create `.env.local` in the project root:
+     ```env
+     GEMINI_API_KEY=your_gemini_key
+     EL_API_KEY=your_elevenlabs_key
+     ```
+3. **Run the app:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Usage
+
+- Click the microphone button to start speaking.
+- Your speech is transcribed and sent to Gemini.
+- The AI's reply is spoken back to you.
+
+---
+
+## Customization
+
+- Change AI personality: Edit the prompt in `SpeechClient.tsx`.
+- Change TTS voice: Edit the ElevenLabs voice ID in `tts/route.ts`.
+
+---
+
+## Troubleshooting
+
+- **No sound?** Check your browser permissions and API keys.
+- **API errors?** See logs in your terminal and browser console.
+
+---
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Docs](https://nextjs.org/docs)
+- [Google Gemini API](https://ai.google.dev/)
+- [ElevenLabs TTS](https://docs.elevenlabs.io/)
